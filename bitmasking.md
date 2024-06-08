@@ -3,18 +3,17 @@
 Bitmasking involves using bitwise operators to manipulate individual bits within an integer. This technique is useful for various tasks like toggling, setting, clearing bits, and checking their status. Understanding bitwise operations is crucial for efficient low-level data manipulation.
 
 
-Bitwise operations involve operations between two bits. Below is a table showing all possible combinations for AND, OR, and XOR operations.
+*Bitwise operations involve operations between two bits. Below is a table showing all possible combinations for AND, OR, and XOR operations.
 
+| A | B | A & B | A &#124; B | A ^ B |
+|---|---|---------|--------|---------|
+| 0 | 0 |   0     |   0    |    0    |
+| 0 | 1 |   0     |   1    |    1    |
+| 1 | 0 |   0     |   1    |    1    |
+| 1 | 1 |   1     |   1    |    0    |
 
-
-| A | B | | A & B | A &#124; B | A ^ B |
-|---|---| |---------|--------|---------|
-| 0 | 0 | |   0     |   0    |    0    |
-| 0 | 1 | |   0     |   1    |    1    |
-| 1 | 0 | |   0     |   1    |    1    |
-| 1 | 1 | |   1     |   1    |    0    |
-*AND (&) , OR (|) , XOR (^)
-
+AND (&) , OR (|) , XOR (^)
+##
 
 ## Bitwise Operators in Python
 
