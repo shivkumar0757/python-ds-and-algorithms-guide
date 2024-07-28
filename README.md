@@ -200,6 +200,34 @@ sample_tuple2 = 1, 2, 3
 # Single element tuple (note the comma)
 single_element_tuple = (1,)
 
+- **Common Methods:**
+# Accessing Elements
+sample_tuple = (10, 20, 30, 40)
+first_element = sample_tuple[0]  # first_element is 10
+last_element = sample_tuple[-1]  # last_element is 40
+
+# Slicing
+sample_tuple = (10, 20, 30, 40, 50)
+sliced_tuple = sample_tuple[1:4]  # sliced_tuple is (20, 30, 40)
+
+# Concatenation
+tuple1 = (1, 2)
+tuple2 = (3, 4)
+concatenated_tuple = tuple1 + tuple2  # concatenated_tuple is (1, 2, 3, 4)
+
+# Iterating Through a Tuple
+sample_tuple = (10, 20, 30)
+for element in sample_tuple:
+    print(element)  # prints 10, 20, 30
+
+# Finding Length
+sample_tuple = (10, 20, 30, 40)
+tuple_length = len(sample_tuple)  # tuple_length is 4
+
+# Tuple Membership
+sample_tuple = (10, 20, 30, 40)
+is_present = 20 in sample_tuple  # is_present is True
+
 
 
 ### Sets
@@ -208,7 +236,6 @@ Sets are an unordered collection data type that is iterable, mutable, and has no
 ## Initialization of Sets
 
 **Syntax:**
-```python
 # Empty set
 empty_set = set()
 
@@ -217,6 +244,40 @@ sample_set = {1, 2, 3}
 
 # Using the set() function with a list
 sample_set2 = set([1, 2, 3])
+
+- **Common Methods:**
+```python
+# Adding or Updating Elements
+sample_dict = {"key1": "value1"}
+sample_dict["key2"] = "value2"  # sample_dict is now {"key1": "value1", "key2": "value2"}
+sample_dict["key1"] = "updated_value1"  # sample_dict is now {"key1": "updated_value1", "key2": "value2"}
+
+# Removing Elements
+sample_dict = {"key1": "value1", "key2": "value2"}
+del sample_dict["key2"]  # sample_dict is now {"key1": "value1"}
+value = sample_dict.pop("key1")  # sample_dict is now {}, value is "value1"
+
+# Accessing Elements
+sample_dict = {"key1": "value1", "key2": "value2"}
+value1 = sample_dict["key1"]  # value1 is "value1"
+value2 = sample_dict.get("key3", "default_value")  # value2 is "default_value"
+
+# Iterating Through a Dictionary
+sample_dict = {"key1": "value1", "key2": "value2"}
+for key in sample_dict:
+    print(key, sample_dict[key])  # prints keys and values
+for key, value in sample_dict.items():
+    print(key, value)  # prints keys and values
+
+# Checking Membership
+sample_dict = {"key1": "value1", "key2": "value2"}
+is_present = "key1" in sample_dict  # is_present is True
+
+# Finding Length
+sample_dict = {"key1": "value1", "key2": "value2"}
+dict_length = len(sample_dict)  # dict_length is 2
+
+```
 
 
 ### Dictionaries
@@ -234,6 +295,40 @@ sample_dict = {"key1": "value1", "key2": "value2"}
 
 # Using the dict() function
 sample_dict2 = dict(key1="value1", key2="value2")
+```
+- **Common Methods:**
+  ```python
+# Adding or Updating Elements
+sample_dict = {"key1": "value1"}
+sample_dict["key2"] = "value2"  # sample_dict is now {"key1": "value1", "key2": "value2"}
+sample_dict["key1"] = "updated_value1"  # sample_dict is now {"key1": "updated_value1", "key2": "value2"}
+
+# Removing Elements
+sample_dict = {"key1": "value1", "key2": "value2"}
+del sample_dict["key2"]  # sample_dict is now {"key1": "value1"}
+value = sample_dict.pop("key1")  # sample_dict is now {}, value is "value1"
+
+# Accessing Elements
+sample_dict = {"key1": "value1", "key2": "value2"}
+value1 = sample_dict["key1"]  # value1 is "value1"
+value2 = sample_dict.get("key3", "default_value")  # value2 is "default_value"
+
+# Iterating Through a Dictionary
+sample_dict = {"key1": "value1", "key2": "value2"}
+for key in sample_dict:
+    print(key, sample_dict[key])  # prints keys and values
+for key, value in sample_dict.items():
+    print(key, value)  # prints keys and values
+
+# Checking Membership
+sample_dict = {"key1": "value1", "key2": "value2"}
+is_present = "key1" in sample_dict  # is_present is True
+
+# Finding Length
+sample_dict = {"key1": "value1", "key2": "value2"}
+dict_length = len(sample_dict)  # dict_length is 2
+
+  ```
 
 
 ## Advanced Data Structures
