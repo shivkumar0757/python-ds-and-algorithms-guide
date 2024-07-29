@@ -199,8 +199,10 @@ sample_tuple2 = 1, 2, 3
 
 # Single element tuple (note the comma)
 single_element_tuple = (1,)
+```
 
 - **Common Methods:**
+```python
 # Accessing Elements
 sample_tuple = (10, 20, 30, 40)
 first_element = sample_tuple[0]  # first_element is 10
@@ -227,7 +229,7 @@ tuple_length = len(sample_tuple)  # tuple_length is 4
 # Tuple Membership
 sample_tuple = (10, 20, 30, 40)
 is_present = 20 in sample_tuple  # is_present is True
-
+```
 
 
 ### Sets
@@ -236,6 +238,7 @@ Sets are an unordered collection data type that is iterable, mutable, and has no
 ## Initialization of Sets
 
 **Syntax:**
+```python
 # Empty set
 empty_set = set()
 
@@ -244,6 +247,7 @@ sample_set = {1, 2, 3}
 
 # Using the set() function with a list
 sample_set2 = set([1, 2, 3])
+```
 
 - **Common Methods:**
 ```python
@@ -296,8 +300,9 @@ sample_dict = {"key1": "value1", "key2": "value2"}
 # Using the dict() function
 sample_dict2 = dict(key1="value1", key2="value2")
 ```
+
 - **Common Methods:**
-  ```python
+```python
 # Adding or Updating Elements
 sample_dict = {"key1": "value1"}
 sample_dict["key2"] = "value2"  # sample_dict is now {"key1": "value1", "key2": "value2"}
