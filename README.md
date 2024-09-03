@@ -301,6 +301,22 @@ sample_dict = {"key1": "value1", "key2": "value2"}
 sample_dict2 = dict(key1="value1", key2="value2")
 ```
 
+**Default Dictionary**
+
+```python
+from collections import defaultdict
+
+# Creating a defaultdict with list as the default factory
+default_dict = defaultdict(list)
+
+# Creating a defaultdict with int as the default factory
+count_dict = defaultdict(int)
+
+# Creating a defaultdict with a custom function
+default_dict_custom = defaultdict(lambda: "default_value")
+
+```
+
 - **Common Methods:**
 ```python
 # Adding or Updating Elements
@@ -339,8 +355,243 @@ dict_length = len(sample_dict)  # dict_length is 2
 ## Advanced Data Structures
 
 ### Arrays
+Arrays we can refer to list options, which are dynamic arrays.
+**Sorted Containers**
+The three most commonly used sorted data structures provided by the sortedcontainers module are:
 
-### Linked Lists
+1. SortedList
+2. SortedDict
+3. SortedSet
+
+```python
+# A SortedList is a list that maintains its elements in sorted order.
+from sortedcontainers import SortedList
+
+# Creating an empty SortedList
+sorted_list = SortedList()
+
+# Creating a SortedList with initial elements
+sorted_list_with_elements = SortedList([4, 1, 5, 2])
+
+# add and removee element
+sorted_list = SortedList([3, 1, 4])
+sorted_list.add(2)  # sorted_list is now [1, 2, 3, 4]
+
+sorted_list = SortedList([1, 2, 3, 4])
+sorted_list.remove(2)  # sorted_list is now [1, 3, 4]
+
+
+```
+
+### Sorted Dictionary
+
+```python
+# A SortedDict is a dictionary-like structure that maintains its keys in sorted order.
+from sortedcontainers import SortedDict
+
+# Creating an empty SortedDict
+sorted_dict = SortedDict()
+
+# Creating a SortedDict with initial elements
+sorted_dict_with_elements = SortedDict({"b": 2, "a": 1, "c": 3})
+
+# Same operation as normal dictionary
+for key in sorted_dict:
+    print(key, sorted_dict[key])  # prints keys in sorted order
+
+```
+###  SortedSet
+```python
+from sortedcontainers import SortedSet
+
+# Creating an empty SortedSet
+sorted_set = SortedSet()
+
+# Creating a SortedSet with initial elements
+sorted_set_with_elements = SortedSet([4, 1, 5, 2])
+
+#Iterating Through a SortedSet
+for element in sorted_set:
+    print(element)  # prints 1, 3, 4 in order
+
+```
+
+### Bisect module
+The bisect module in Python provides support for maintaining a sorted list in sorted order without having to sort the list repeatedly. It provides functions to insert elements into a list while maintaining its sorted order and to find the position where elements should be inserted.
+
+```python
+import bisect
+
+# Initialize a sorted list
+sorted_list = [1, 3, 4, 4, 7]
+
+# Find the insertion point for 4 using bisect_left (inserts before any existing 4)
+left_index = bisect.bisect_left(sorted_list, 4)
+print(f"Insertion point for 4 using bisect_left: {left_index}")  # Output: 2
+
+# Find the insertion point for 4 using bisect_right (inserts after any existing 4)
+right_index = bisect.bisect_right(sorted_list, 4)
+print(f"Insertion point for 4 using bisect_right: {right_index}")  # Output: 4
+
+# Insert 4 into the sorted list at the position returned by bisect_left
+bisect.insort_left(sorted_list, 4)
+print(f"List after inserting 4 using insort_left: {sorted_list}")  # Output: [1, 3, 4, 4, 4, 7]
+
+# Insert 4 into the sorted list at the position returned by bisect_right
+bisect.insort_right(sorted_list, 4)
+print(f"List after inserting 4 using insort_right: {sorted_list}")  # Output: [1, 3, 4, 4, 4, 4, 7]
+
+# Using bisect_left to find the index to insert 5 to maintain sorted order
+index_for_5 = bisect.bisect_left(sorted_list, 5)
+print(f"Insertion point for 5 using bisect_left: {index_for_5}")  # Output: 6
+
+# Using insort_right to insert 5 in the sorted list
+bisect.insort_right(sorted_list, 5)
+print(f"List after inserting 5 using insort_right: {sorted_list}")  # Output: [1, 3, 4, 4, 4, 4, 5, 7]
+
+```
+
+## Linked Lists
+Python does not have a built-in linked list data structure, so we typically implement linked lists using classes. There are three main types of linked lists:
+
+Singly Linked List: Each node points to the next node.
+Doubly Linked List: Each node points to both the next and the previous node.
+Circular Linked List: The last node points back to the first node, forming a circle.
+
+**1. Singly Linked List**
+A Singly Linked List is a collection of nodes where each node has two parts:
+
+Data: The value stored in the node.
+Next: A pointer/reference to the next node in the list.
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert_at_beginning(self, data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+
+    def insert_at_end(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            return
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = new_node
+
+    def delete_node(self, key):
+        current = self.head
+        if current and current.data == key:
+            self.head = current.next
+            current = None
+            return
+        prev = None
+        while current and current.data != key:
+            prev = current
+            current = current.next
+        if current is None:
+            return
+        prev.next = current.next
+        current = None
+
+    def search(self, key):
+        current = self.head
+        while current:
+            if current.data == key:
+                return True
+            current = current.next
+        return False
+
+    def reverse(self):
+        prev = None
+        current = self.head
+        while current:
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+        self.head = prev
+
+```
+
+**2. Doubly Linked List**
+A Doubly Linked List is a linked list where each node has three parts:
+
+Data: The value stored in the node.
+Prev: A pointer/reference to the previous node.
+Next: A pointer/reference to the next node.
+
+```python
+class DNode:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        self.prev = None
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def insert_at_beginning(self, data):
+        new_node = DNode(data)
+        if self.head is None:
+            self.head = new_node
+            return
+        new_node.next = self.head
+        self.head.prev = new_node
+        self.head = new_node
+
+    def insert_at_end(self, data):
+        new_node = DNode(data)
+        if self.head is None:
+            self.head = new_node
+            return
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = new_node
+        new_node.prev = current
+
+    def delete_node(self, key):
+        current = self.head
+        while current:
+            if current.data == key:
+                if current.prev:
+                    current.prev.next = current.next
+                if current.next:
+                    current.next.prev = current.prev
+                if current == self.head:
+                    self.head = current.next
+                return
+            current = current.next
+
+    def search(self, key):
+        current = self.head
+        while current:
+            if current.data == key:
+                return True
+            current = current.next
+        return False
+
+    def reverse(self):
+        current = self.head
+        while current:
+            current.prev, current.next = current.next, current.prev
+            current = current.prev
+        if current:
+            self.head = current.prev
+
+```
 
 ### Stacks
 
