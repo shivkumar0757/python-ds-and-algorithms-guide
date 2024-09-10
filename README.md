@@ -36,13 +36,13 @@ This guide aims to provide a comprehensive overview of Python basics, data struc
 ### Data Types
 
 ```python
-integer = 5
-float_number = 5.0
-string = "Hello"
-list_example = [1, 2, 3]
-tuple_example = (1, 2, 3)
-set_example = {1, 2, 3}
-dictionary_example = {"a": 1, "b": 2}
+integer = 5                #int
+float_number = 5.0         #float
+string = "Hello"           #str   : immutable
+list_example = [1, 2, 3]   #list  : mutable
+tuple_example = (1, 2, 3)  #tuple : immutable
+set_example = {1, 2, 3}    #set   : unordered, unique elements
+dictionary_example = {"a": 1, "b": 2}  #dict : key-value pairs
 ```
 
 ### Control Structures
@@ -53,18 +53,24 @@ dictionary_example = {"a": 1, "b": 2}
 if x > 0:  # checking if x is positive
 elif x < 0:  # checking if x is negative
 else:  # if x is zero
+
+# Ternary Operator
+result = "val1" if True else "val2" 
 ```
 
 - **Loops:**
 
 ```python
 # For Loop
-for i in range(5):  # prints numbers 0 to 4
-for i in reversed(range(5)):  # prints numbers 4 to 0
-for i in range(4, -1, -1):  # prints numbers 4 to 0
-for num in arr:  # iterate over elements in an array
+for i in range(5): pass  # prints numbers 0 to 4
+for i in reversed(range(5)): pass  # prints numbers 4 to 0
+for i in range(4, -1, -1): pass # prints numbers 4 to 0
+for num in arr: pass  # iterate over elements in an array
 for index, num in enumerate(arr):  # iterate with index
     print(index, num)
+    
+#single line for loop
+squared_list = [x**2 for x in range(5)]  # squared_list is [0, 1, 4, 9, 16]
 
 # Using break and continue
 for i in range(10):  
@@ -82,6 +88,10 @@ i = 0
 while i < 5:  # prints numbers 0 to 4
     print(i)
     i += 1
+
+# sort object using attrgetter
+from operator import attrgetter
+sorted_students = sorted(students, key=attrgetter('grade', 'age'), reverse=True)
 ```
 
 
@@ -165,7 +175,13 @@ sub_list = my_list[1:4]  # sub_list is [2, 3, 4]
 
 ```python
 # Extend list by appending elements from another list
-my_list.extend([7, 8])  # my_list is now [1, 2, 3, 4, 5, 6, 7, 8]
+my_list.extend([7, 8])  # my_list is now [4, 5, 6, 7, 8]
+
+# Remove and return last element
+last_element = my_list.pop()  # complexity O(1) (average case, else can be O(n) if resizing is needed)
+
+#combine list uisng plus operator
+combined_list = my_list + [9, 10]  # combined_list is [4, 5, 6, 7, 8, 9, 10]
 
 # Get the index of an element
 index_of_four = my_list.index(4)  # index_of_four is 3
@@ -249,39 +265,6 @@ sample_set = {1, 2, 3}
 sample_set2 = set([1, 2, 3])
 ```
 
-- **Common Methods:**
-```python
-# Adding or Updating Elements
-sample_dict = {"key1": "value1"}
-sample_dict["key2"] = "value2"  # sample_dict is now {"key1": "value1", "key2": "value2"}
-sample_dict["key1"] = "updated_value1"  # sample_dict is now {"key1": "updated_value1", "key2": "value2"}
-
-# Removing Elements
-sample_dict = {"key1": "value1", "key2": "value2"}
-del sample_dict["key2"]  # sample_dict is now {"key1": "value1"}
-value = sample_dict.pop("key1")  # sample_dict is now {}, value is "value1"
-
-# Accessing Elements
-sample_dict = {"key1": "value1", "key2": "value2"}
-value1 = sample_dict["key1"]  # value1 is "value1"
-value2 = sample_dict.get("key3", "default_value")  # value2 is "default_value"
-
-# Iterating Through a Dictionary
-sample_dict = {"key1": "value1", "key2": "value2"}
-for key in sample_dict:
-    print(key, sample_dict[key])  # prints keys and values
-for key, value in sample_dict.items():
-    print(key, value)  # prints keys and values
-
-# Checking Membership
-sample_dict = {"key1": "value1", "key2": "value2"}
-is_present = "key1" in sample_dict  # is_present is True
-
-# Finding Length
-sample_dict = {"key1": "value1", "key2": "value2"}
-dict_length = len(sample_dict)  # dict_length is 2
-
-```
 
 
 ### Dictionaries
@@ -301,6 +284,35 @@ sample_dict = {"key1": "value1", "key2": "value2"}
 sample_dict2 = dict(key1="value1", key2="value2")
 ```
 
+- **Common Methods:**
+```python
+# Adding or Updating Elements
+sample_dict = dict(key1="value1", key2="value2")
+sample_dict["key2"] = "value2"  # sample_dict is now {"key1": "value1", "key2": "value2"}
+
+# Removing Elements
+del sample_dict["key2"]  # sample_dict is now {"key1": "value1"}
+value = sample_dict.pop("key1")  # sample_dict is now {}, value is "value1"
+
+# Accessing Elements
+value1 = sample_dict["key1"]  # value1 is "value1"
+value2 = sample_dict.get("key3", "default_value")  # value2 is "default_value"
+
+# Iterating Through a Dictionary
+for key in sample_dict:
+    print(key, sample_dict[key])  # prints keys and values
+    
+for key, value in sample_dict.items():
+    print(key, value)  # prints keys and values
+
+# Checking Membership
+is_present = "key1" in sample_dict  # is_present is True
+
+# Finding Length
+dict_length = len(sample_dict)  # returns the number of key-value pairs in the dictionary (2 in this case)
+```
+
+
 **Default Dictionary**
 
 ```python
@@ -313,8 +325,7 @@ default_dict = defaultdict(list)
 count_dict = defaultdict(int)
 
 # Creating a defaultdict with a custom function
-default_dict_custom = defaultdict(lambda: "default_value")
-
+default_dict_custom = defaultdict(lambda : "default_value")
 ```
 
 - **Common Methods:**
@@ -350,7 +361,35 @@ sample_dict = {"key1": "value1", "key2": "value2"}
 dict_length = len(sample_dict)  # dict_length is 2
 
   ```
+  
+### Strings
+Strings are a fundamental data type in Python that represent sequences of characters. They are immutable, meaning their elements cannot be changed after creation.
 
+```python
+# Ways to Initialize a string
+my_string = "Hello, World!"
+my_string = str(123)  # Convert an integer to a string
+# loop through string
+for char in my_string:
+    print(char)
+# character ascii
+ascii_value = ord('a')  # ascii_value is 97
+char = chr(97)  # char is 'a'
+
+# format string
+name = "Alice"
+age = 30
+formatted_string = f"My name is {name} and I am {age} years old."  # Using f-strings
+formatted_string = "My name is {} and I am {} years old.".format(name, age)  # Using format method
+
+escaped_string = "He said, \"Hello, World!\""  # Use backslash to escape quotes
+
+# String Methods like upp
+upper_case = my_string.upper()  # upper_case is "HELLO, WORLD!"
+lower_case = my_string.lower()  # lower_case is "hello, world!"
+
+
+```
 
 ## Advanced Data Structures
 
