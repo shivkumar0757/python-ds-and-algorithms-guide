@@ -387,8 +387,6 @@ escaped_string = "He said, \"Hello, World!\""  # Use backslash to escape quotes
 # String Methods like upp
 upper_case = my_string.upper()  # upper_case is "HELLO, WORLD!"
 lower_case = my_string.lower()  # lower_case is "hello, world!"
-
-
 ```
 
 ## Advanced Data Structures
@@ -419,6 +417,14 @@ sorted_list.add(2)  # sorted_list is now [1, 2, 3, 4]
 sorted_list = SortedList([1, 2, 3, 4])
 sorted_list.remove(2)  # sorted_list is now [1, 3, 4]
 
+# find and remove multiple or list
+sorted_list.discard(2)  
+sorted_list.index(3)  # returns the index of 3 in the list (2 in this case)
+# union, intersection, difference
+
+union = sorted_list | sorted_list2  # union is [1, 2, 3, 4, 5]
+intersection = sorted_list & sorted_list2  # intersection is [3]
+difference = sorted_list - sorted_list2  # difference is [1, 2]
 
 ```
 
@@ -651,6 +657,110 @@ class DoublyLinkedList:
 ### Searching Algorithms
 
 ### Dynamic Programming
+
+*Common patterns*
+1. Fibonacci Pattern: Climbing Stairs
+
+*Identification*: 
+If a problem asks for the number of ways to reach a target (like climbing stairs), or combinations involving two choices (1 or 2 steps), it often follows a Fibonacci pattern.
+
+*Template*:
+```python
+def climb_stairs(n):
+    if n <= 2:  # Base case
+        return n
+    return climb_stairs(n - 1) + climb_stairs(n - 2)
+
+```
+
+2. Knapsack Pattern: 0/1 Knapsack
+- Identification: If a problem involves making decisions to maximize or minimize a value with given constraints (like capacity), it follows the Knapsack pattern.
+- Template:
+
+```python
+def knapsack_recursive(wt, val, W, n):
+    if n == 0 or W == 0:
+        return 0
+    if wt[n-1] > W:
+        return knapsack_recursive(wt, val, W, n-1)
+    return max(val[n-1] + knapsack_recursive(wt, val, W-wt[n-1], n-1), knapsack_recursive(wt, val, W, n-1))
+```
+3. Minimum Path Sum
+
+Given an m x n grid filled with non-negative numbers, find a path from the top left to the bottom right which minimizes the sum of all numbers along its path. You can only move either down or right at any point in time.
+```python
+def dp_recursive(parameters, memo):
+    # Base case check
+    if base_condition:
+        return base_result
+
+    # Check memo dictionary for precomputed results
+    if parameters in memo:
+        return memo[parameters]
+
+    # Compute result recursively
+    result = recursive_logic(parameters)
+
+    # Store result in memo dictionary
+    memo[parameters] = result
+
+    return result
+
+def solve_problem():
+    # Initialize memo dictionary
+    memo = {}
+    # Call recursive function with initial parameters
+    return dp_recursive(initial_parameters, memo)
+
+```
+4. Given two strings text1 and text2, find the length of their longest common subsequence.
+
+- Identification: If the problem involves comparing two sequences to find the longest or shortest subsequence or common pattern, it usually follows the LCS pattern.
+- Template:
+```python
+def lcs_template(text1, text2):
+    m, n = len(text1), len(text2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if text1[i - 1] == text2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+    return dp[m][n]
+
+```
+
+5.  Partitioning Problems Pattern: Word Break Problem
+-   Given a string s and a dictionary of words wordDict, determine if s can be segmented into a space-separated sequence of one or more dictionary words.
+- Identification: When the problem requires partitioning a sequence into valid parts based on a set of rules (like dictionary words or palindromes).
+- Template:
+```python
+def word_break_recursive(s, wordDict, start, memo):
+    # Base case: reached the end of the string
+    if start == len(s):
+        return True
+
+    # Check if result is already computed
+    if start in memo:
+        return memo[start]
+
+    # Try to partition the string
+    for end in range(start + 1, len(s) + 1):
+        if s[start:end] in wordDict and word_break_recursive(s, wordDict, end, memo):
+            memo[start] = True
+            return True
+
+    # If no valid partition is found
+    memo[start] = False
+    return False
+
+def word_break(s, wordDict):
+    memo = {}
+    return word_break_recursive(s, wordDict, 0, memo)
+```
+
+
 
 ### Graph Algorithms
 
